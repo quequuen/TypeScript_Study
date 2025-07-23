@@ -95,3 +95,25 @@
 // console.log(bigIntNumber + anotherBigInt);
 // //일반 int랑 BigInt를 연산하면 컴파일 오류가 남
 //---
+
+//그 외 타입들
+//any: 모르니까 신경 끄자
+//unknown: 모르니까 조심하자
+//null&undefined
+//void
+//never
+
+let anyValue: any = 10; //Number
+anyValue = "Hello"; //String
+anyValue = true; //Boolean
+anyValue = [1, 2, 3]; //Array
+anyValue = { name: "John" }; //Object
+//어떤 값을 넣어도 오류가 나지 않음
+
+// let anyString: any = "123";
+let anyString: string = "123";
+console.log(anyString.toUpperCase());
+// console.log(anyString.nonExistentMethod()); //어느 기본 타입에도 존재하지 않는 메소드
+//타입스크립트는 anyString 변수가 어떤 타입일지 알 수 없으므로 컴파일 오류를 발생시키지 않음.(위험함)
+//anyString이 숫자일 때는 toUpperCase()에서 오류가 발생하고 anyString이 문자열일 때는 nonExstentMethod()에서 오류가 발생
+//문자열에도 존재하지 않기 때문->오류가 컴파일 시점에서 걸러지지 않고 이처럼 런타임 시전에서야 오류가 발생하게 됨
