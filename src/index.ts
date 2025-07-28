@@ -274,4 +274,25 @@
   // colors.push(123);  //오류!
 
   console.log(numbers[0], fruits[1], colors[2]);
+
+  let matrix: number[][] = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+  ];
+
+  console.log(matrix[0][1]);
+
+  let cube: number[][][] = [
+    [
+      [1, 2],
+      [3, 4],
+    ],
+    [
+      [5, 6],
+      [7, 8],
+    ],
+  ];
+
+  console.log(cube[1][0][1]);
 }
