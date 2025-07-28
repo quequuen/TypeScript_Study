@@ -257,8 +257,8 @@
   handleValue({ name: "John" });
   //객체이기 때문에 오류가 발생, 추후에 handleValue 인수 타입에 object 넣음
 }
+//----------------------------------------------------------------
 {
-  //----------------------------------------------------------------
   //배열과 튜플, 객체 기초
   let numbers: number[] = [1, 2, 3, 4, 5, 6];
 
@@ -275,24 +275,155 @@
 
   console.log(numbers[0], fruits[1], colors[2]);
 
+  //내부 요소가 지정된 타입과 달라도 오류를 일으킴
   let matrix: number[][] = [
+    //2차원 배열
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9],
+    //[7,8,true]
   ];
 
   console.log(matrix[0][1]);
 
   let cube: number[][][] = [
+    //3차원 배열
     [
       [1, 2],
       [3, 4],
     ],
     [
       [5, 6],
-      [7, 8],
+      [7, 8], //7
     ],
   ];
 
   console.log(cube[1][0][1]);
+
+  const names: string[] = ["Alice", "Bob", "Charlie", "David", "Boy"];
+
+  const nameLengths: number[] = names.map((name) => name.length);
+  console.log(nameLengths);
+
+  const longNames: string[] = names.filter((name) => name.length > 4);
+  console.log(longNames);
+
+  const foundName: string | undefined = names.find((name) =>
+    name.startsWith("B")
+  );
+  console.log(foundName);
+  //filter가 아닌 find이기 때문에 오류가 나지 않고 먼저 나오는 Bob 출력
+
+  const originalArray: number[] = [1, 2, 3, 4, 5];
+  originalArray[0] = 10;
+
+  const readOnlyNumbers: ReadonlyArray<number> = originalArray; //제네릭
+  const readOnlyScores: readonly number[] = [90, 85, 95];
+
+  // readOnlyNumbers[0] = 10;  //ReadonlyArray라서 재할당 불가
+  // readOnlyScores.push(100);  //readonly라서 재할당 불가
+
+  //스프레드 연산자 사용
+  const newArray = [...readOnlyNumbers, 6]; //[1,2,3,4,5,6]
+  newArray[0] = 0;
+  newArray.push(7);
+
+  console.log(newArray);
+
+  //튜플
+
+  let person: [string, number] = ["John", 30];
+  console.log(person[0]);
+  console.log(person[1]);
+
+  // person = [30,'John'];
+  // person = ['John',30, true];
+  //튜플은 배열처럼 생겼지만, 각 요소의 타입과 순서가 정해져 있고 이를 어기면 컴파일 오류가 발생함.
+
+  //구조분해 할당
+  const [firstName, age] = person;
+  console.log(firstName);
+  console.log(age);
+
+  type OptinalTuple = [string, number, boolean?];
+  //튜플은 선택적 요소도 포함 가능
+  const complete: OptinalTuple = ["Jane", 25, true];
+  //마지막 요소가 들어갈 수도 있고
+  const partial: OptinalTuple = ["Mike", 40];
+  //마지막 요소가 들어가지 않을 수도 있음
+
+  //튜플을 함수 반환값으로 사용하는 예제
+  function getUserInfo(): [string, number, boolean] {
+    return ["alex_dev", 28, false];
+  }
+
+  //리턴값 구조 분해 할당
+  const [username, userAge, isAdmin] = getUserInfo();
+  console.log(`Username: ${username}, Age: ${userAge}, Admin: ${isAdmin}`);
+
+  //타입 추론에 있어 배열과 튜플의 차이
+
+  const inferredArray = [1, "Hello"];
+  //inferredArray: (string | number)[]
+
+  const inferredTuple = [1, "Hello"] as const;
+  //inferredTuple: readonly [1,'Hello']
+  //각 값이 상수가 되어버려서 이 값들 외에는 다른 값들이 들어올 수 없음
+  //실무에서 필요시 특정 데이터 묶음의 값 제약이 가능함.
+
+  // inferredTuple[0] = 2;  //오류
+  // inferredTuple[1] = "world";  //오류
+
+  let explicitTuple: [number, string] = [1, "Hello"];
+  explicitTuple = [2, "world"];
+
+  const person2: { name: string; age: number } = { name: "John", age: 25 };
+
+  // const wrongPerson1: { name: string; age: number } = {
+  //   name: "John",
+  //   age: "25",
+  // };
+  // age의 타입이 숫자인 관계로 "25"와는 타입이 맞지 않아 오류
+
+  // const wrongPerson2: { name: string; age: number } = { name: "Mark" };
+  // name과 age가 와야 하는데 name만 와서 오류
+
+  // const wrongPerson3: {name: string; age: number} = {name: "John", age: 25, married: true,}
+  // 타입에서 정의 되지 않은 속성을 넣어 오류
+
+  const person3: { name: string; age: number } = {
+    name: "John",
+    age: 25,
+  };
+
+  person3.name = "Jane";
+  // person3.age = "30";
+  // person3.married = true;
+
+  // 객체 사용 예시
+  interface User {
+    id: number;
+    username: string;
+    isAdmin: boolean;
+  }
+
+  const adminUser: User = {
+    id: 0,
+    username: "admin",
+    isAdmin: true,
+  };
+
+  // const user1: User1 = {
+  //   id: 1, username: "admin",
+  // }
+  // User1이란 타입을 정의헤놓은 객체가 없을 뿐더러 isAdmin이 들어가지 않아 구조가 일치하지 않음
+
+  // const user2: User = {
+  //   id: "2",
+  //   username: "admin",
+  //   isAdmin: false,
+  // }
+  // id 타입이 맞지 않음
+}
+{
 }
