@@ -426,4 +426,59 @@
   // id 타입이 맞지 않음
 }
 {
+  //열거형(enum)
+  //열거형이 필요한 예
+  {
+    const USER_ROLE_ADMIN = 0;
+    const USER_ROLE_MANAGER = 1;
+    const USER_ROLE_EMPLOYEE = 2;
+    const USER_ROLE_GUEST = 3;
+
+    function checkUserAccess(userRole: number): boolean {
+      if (userRole === USER_ROLE_ADMIN || userRole === USER_ROLE_MANAGER) {
+        return true;
+      }
+      return false;
+    }
+
+    console.log(checkUserAccess(USER_ROLE_ADMIN));
+    console.log(checkUserAccess(2));
+    console.log(checkUserAccess(99)); //의도치 않은 숫자 99가 들어가도 실행
+  }
+  //열거형으로 수정
+
+  enum UserRole {
+    Admin = 0,
+    Manager = 1,
+    Employee = 2,
+    Guest = 3,
+  }
+
+  function checkUserAccess(userRole: UserRole): boolean {
+    if (userRole === UserRole.Admin || userRole === UserRole.Manager) {
+      return true;
+    }
+    return false;
+  }
+
+  console.log(checkUserAccess(UserRole.Admin));
+  console.log(checkUserAccess(3));
+  // console.log(checkUserAccess(99)); //지정해놓은 숫자가 아닌 다른 수가 들어가서 오류
+  // 열거형은 쉽게 말해 '딱 이 값들만 다질 수 있는' 새로운 타입을 만드는 것
+
+  enum Direction {
+    Up, //0
+    Down, //1
+    Left, //2
+    Right, //3
+  }
+  //값을 할당할 이름들만 넣고, 이들의 값들을 명시하지도 않음
+
+  console.log(Direction.Up);
+  console.log(Direction.Down);
+  console.log(Direction.Left);
+  console.log(Direction.Right);
+
+  console.log(Direction[0]);
+  console.log(Direction[1]);
 }
