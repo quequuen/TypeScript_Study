@@ -481,4 +481,144 @@
 
   console.log(Direction[0]);
   console.log(Direction[1]);
+
+  enum HttpStatus {
+    OK = 200,
+    Created = 201,
+    BadRequest = 400,
+    Unanthorized = 401,
+    Forbidden = 403,
+    NotFound = 404,
+    InternalServerError = 500,
+  }
+
+  const status1: HttpStatus = HttpStatus.OK;
+  const status2: HttpStatus = 201;
+  // const status3: HttpStatus = 203; //열거형 선언문에 포함되지 않는 값이라 오류
+
+  console.log(status1);
+  console.log(status2);
+
+  enum Priority {
+    Low = 5,
+    Medium,
+    High = 10,
+    Critical,
+  }
+
+  console.log(Priority.Low);
+  console.log(Priority.Medium);
+  console.log(Priority.High);
+  console.log(Priority.Critical);
+  //일부 멤버에만 값을 지정할 경우, 값이 지정되지 않은 멤버들은 이전 값에서 자동으로 1이 증가한 값을 갖게 됨.
+
+  enum Theme {
+    Light = "light-theme",
+    Dark = "dark-theme",
+    System = "system-theme",
+  }
+
+  function applyTheme(theme: Theme): void {
+    const className = theme;
+    console.log(`Theme applied: ${className}`);
+  }
+
+  applyTheme(Theme.Dark); //Theme applied: dark-theme
+  // applyTheme("light_theme");
+  //열거형의 값에 있어서 문자열의 경우 숫자와 다른 점이 존재
+  // 숫자값은 열거형의 값이 들어갈 자리에 대신 들어갈 수 있었지만 문자열은 그렇게 하지 못함.
+  // 그렇기 때문에 이와 값이 문자열을 직접 넣으면 컴파일 오류가 발생
+
+  console.log(Theme.Dark);
+  console.log(Theme.System);
+  console.log(Theme.Light);
+
+  //같은 열거형 내에서 숫자 값과 문자열 값 함께 사용 가능
+  //하지만 이처럼 혼합된 값들을 사용하는 방식은 코드의 의도를 명확히 전달하기 어렵게 때문에 권장되지는 않음
+  enum ApiResponse {
+    Success = 200,
+    Created = 201,
+    BadRequest = 400,
+    Unauthorized = 401,
+    NotFound = 404,
+    ServerError = 500,
+    SUCCESS_MESSAGE = "Operation completed successfully",
+    ERROR_MESSAGE = "An error ocurred during the operation",
+  }
+  {
+    enum Direction {
+      Up,
+      Down,
+      Left,
+      Right,
+    }
+    //열거형으로 정의한 모든 요소들이 dist 파일에 들어감
+
+    const dir = Direction.Up;
+
+    const enum FastDirection {
+      Up,
+      Down,
+      Left,
+      Right,
+    }
+    //앞에 const가 붙음
+    //const가 붙은 열거형과 붙지 않은 열거형은 겉으로는 재부분 똑같이 동작하지만 컴파일 및 실행과정에서 차이가 있어
+    //dist 파일을 보면 구조가 다름
+    //const가 붙은 열거형은 dist 파일에 안 들어감
+
+    const fastDir = FastDirection.Up;
+    //fastDir에 담길 값이 결과적으로 0이기 때문에 dist 폴더의 내용과 같이 단순히 0으로 하드코딩 됨
+    //어차피 코드에서 다른 멤버들이 안 쓰일 거를 생각하면 이게 합리적임
+    //이러한 이유로 'const' 열거형은 최적화가 특별히 중요한 상황들에서 사용
+    //객체 생성 없이 모든 멤버들의 값을 인라인화ㅎ므로 컴파일된 파일들의 크기가 작고 런타임 성능이 최적화됨
+
+    // const fastUp = FastDirection[0]; //다만 const 열거형을 사용하면 숫자 타입의 값도 역방향으로 접근 불가
+    //또한 런타임에 사용되는 자바스크립트 코드에 해당 열거형의 객체가 없기 때문에 디버깅 및 분석과정에 어려움이 있음
+    // 때문에 성능 최적화가 무엇보다 중요한 특별한 경우를 제외하고는 보통 일반 열거형이 더 널리 사용됨
+  }
+
+  enum CardSuit {
+    Clubs,
+    Diamonds,
+    Hearts,
+    Spades,
+  }
+
+  function displaySuitEnum(suit: CardSuit): string {
+    switch (suit) {
+      case CardSuit.Clubs:
+        return "♣️";
+      case CardSuit.Diamonds:
+        return "🔷";
+      case CardSuit.Hearts:
+        return "♥️";
+      case CardSuit.Spades:
+        return "♠️";
+    }
+  }
+
+  console.log(displaySuitEnum(CardSuit.Hearts));
+
+  type CardSuitUnion = "clubs" | "diamonds" | "hearts" | "spades";
+
+  function displaySuitUnion(suit: CardSuitUnion): string {
+    switch (suit) {
+      case "clubs":
+        return "♣️";
+      case "diamonds":
+        return "🔷";
+      case "hearts":
+        return "♥️";
+      case "spades":
+        return "♠️";
+    }
+  }
+
+  console.log(displaySuitUnion("hearts"));
+  // console.log(displaySuitUnion("joker")); //Union 값에 없음
+
+  //값과 이름을 모두 관리하거나 복잡한 로직이 필요한 경우는 열거형,
+  //성능 최적화가 중요하고 객체를 남기기 싫을 때는 const 열거형,
+  //단순한 고정 값 집합을 타입만으로 엄격하게 관리하고 싶을 때는 유니언 타입 사용
 }
