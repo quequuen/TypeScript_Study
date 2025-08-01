@@ -622,3 +622,64 @@
   //성능 최적화가 중요하고 객체를 남기기 싫을 때는 const 열거형,
   //단순한 고정 값 집합을 타입만으로 엄격하게 관리하고 싶을 때는 유니언 타입 사용
 }
+
+{
+  //함수
+
+  function greet(name: string): string {
+    return `Hello, ${name}!`;
+  }
+
+  const farewell = function (name: string): string {
+    return `Goodbye, ${name}!`;
+  };
+
+  const add = (a: number, b: number): number => {
+    return a + b;
+  };
+
+  console.log(greet("World"), farewell("World"), add(5, 3));
+
+  {
+    function greet(name?: string): string {
+      //해당 인자를 넣어도 되고 안 넣어도 된다는 의미
+      //이렇게 작성했을 경우 함수 내부의 'name' 값은 문자열 또는 undefined
+      return name ? `Hello, ${name}!` : `Hello!`;
+    }
+
+    console.log(greet("World"), greet());
+  }
+  {
+    function add(a: number, b: number, c?: number): number {
+      // return a+b+c;// c가 undefined인 경우를 처리하지 못해 오류가 남
+      return c ? a + b + c : a + b;
+    }
+
+    const addition1 = add(1, 2);
+    const addition2 = add(1, 2, 3);
+    // const addition3 = add(1); //매개변수가 최소 두개는 있어야 하는데 없어서 오류!
+
+    function add2(a: number, b?: number, c?: number): number {
+      return b && c ? a + b + c : a;
+    }
+
+    const addition1_2 = add2(1, 2);
+    const addition2_2 = add2(1, 2, 3);
+
+    const addition3_2 = add2(1); //매개변수 개수가 허용범위 안이라서 오류 안 남
+
+    // funcion addition3_2(a?: number, b: number, c: number): number{
+
+    // }
+    //선택적 매개변수에 대해 기억해 두어야 할 또 다른 점은, 필수 매배변수 뒤에만 올 수 있다는 점.
+  }
+
+  //기본값을 갖는 매개변수
+  function greeting(name: string = "Guest"): string {
+    return `Hello, ${name}!`;
+  }
+
+  console.log(greeting());
+  console.log(greeting("Developer"));
+  //매개변수가 인자로 전달되지 않았을 경우, 이 함수에서 해당 값을 기본으로 갖게 됨
+}
