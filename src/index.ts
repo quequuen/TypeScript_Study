@@ -682,4 +682,12 @@
   console.log(greeting());
   console.log(greeting("Developer"));
   //매개변수가 인자로 전달되지 않았을 경우, 이 함수에서 해당 값을 기본으로 갖게 됨
+
+  function increase(x: number, y: number = 1): number {
+    return x + y;
+  }
+
+  const increased1 = increase(5);
+  const increased2 = increase(5, 2);
+  const increased3 = increase(); //기본값이 정해지지 않는 x는 최소한의 매개변수로 필수적으로 전해주어야 함.
 }
