@@ -689,5 +689,67 @@
 
   const increased1 = increase(5);
   const increased2 = increase(5, 2);
-  const increased3 = increase(); //기본값이 정해지지 않는 x는 최소한의 매개변수로 필수적으로 전해주어야 함.
+  // const increased3 = increase(); //기본값이 정해지지 않는 x는 최소한의 매개변수로 필수적으로 전해주어야 함.
+
+  function sum(...numbers: number[]): number {
+    // 함수에 쉼표로 구분된 0개 이상의 인자들을 하나의 배열로 묶어서 받아온다는 의미
+    return numbers.reduce((acc, curr) => acc + curr, 0);
+  }
+
+  console.log(sum(1, 2, 3), sum(10, 20, 30, 40, 50), sum());
+
+  //나머지 매개변수 역시 일반 매개변수와 함께 사용 가능
+  function sumItem(item: string, ...args: number[]) {
+    //첫번째 매개변수는 하나의 문자열이고, 그 이후로는 0개 이상의 숫자들이 배열로 묶여 들어옴
+    const sum = args.reduce((acc, curr) => acc + curr, 0);
+    return `${item}: ${sum}`;
+  }
+
+  console.log(
+    sumItem("apple", 1, 2, 3),
+    sumItem("banana", 4, 5, 6, 7, 8),
+    sumItem("cherry")
+  );
+
+  // function wrongFuc(...args: string[], item: string){
+  // }  // 나머지 매개변수가 일반 매개변수보다 앞에 올 시 컴파일 오류 발생
+  // 만약 그렇지 않으면 여러 인자들을 전달했을 때 어디까지가 나머지 매개변수로 들어갈 것인지 알 수 없는 경우들이 생김
+
+  //함수 오버로딩
+  // 같은 이름의 함수들이 매개변수의 타입에 따라 다르게 동작하도록 하는 것을 말함.
+  //시그니처 작성
+  function processInput(value: string): string;
+  //해당 함수의 매개변수가 문자열일 경우, 반환값도 문자열일 것임이 명시됨
+  function processInput(value: number): number;
+  //현재 상태에서는 주석처리 하거나 없애도 오류 안 남.
+
+  function processInput(value: string | number): string | number {
+    if (typeof value === "string") {
+      return value.toUpperCase();
+    } else {
+      return value * 2;
+    }
+  }
+
+  const processed1 = processInput("hello");
+  const processed2 = processInput(42);
+
+  // const processed3 = processInput(true);  //number 또는 string이 아니라서 오류
+
+  const myString = processed1.toLowerCase();
+  //시그니처를 지울 시 이 값이 문자열이라는 것을 알 수가 없기 때문에 문자열의 메소드를 바로 쓰지 못하도록 함
+
+  //콜백함수
+  function fetchData(url: string, callback: (data: string) => void): void {
+    //콜백함수의 타입으로서, 문자열을 매개변수로 받고 반환값은 없는 함수가 지정되어 있음
+    //이런 식으로 고차함수를 선언할 때, 매개변수 또는 반환값으로 사용되는 함수의 타입도 작성.
+    setTimeout(() => {
+      const data = `Data from ${url}`;
+      callback(data);
+    }, 100);
+  }
+
+  fetchData("api/users", (response) => {
+    console.log(response);
+  });
 }
