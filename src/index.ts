@@ -753,3 +753,124 @@
     console.log(response);
   });
 }
+
+{
+  // 인터페이스 기본
+  interface Person {
+    name: string;
+    age: number;
+  }
+
+  const person: Person = {
+    name: "John",
+    age: 30,
+  };
+
+  // const invalidPerson1: Person = {
+  //   name:"Alice"
+  // };
+
+  // const invalidPerson2: Person = {
+  //   name: "John",
+  //   age: 30,
+  //   job: "Engineer"
+  // };
+  //Person 타입이면서 속성이 누락되거나 정의 되지 않는 속성을 갖고 있다면 컴파일 오류
+
+  //선택적 속성
+  //넣어도 되고 안 넣어도 됨
+  interface Product {
+    name: string;
+    price: number;
+    description?: string;
+    //string 또는 undefined
+  }
+
+  const product1: Product = {
+    name: "Laptop",
+    price: 1200,
+  };
+
+  const product2: Product = {
+    name: "Phone",
+    price: 800,
+    description: "Smartphone with high-end features",
+  };
+
+  function printDescription1(product: Product): void {
+    // console.log(product.description.toUpperCase());
+    // 조건문으로 타입가드를 하지 않고 해당 속성에서 문자열의 메소드인 'toUpperCase'를 호출하려 하면 컴파일 오류 발생
+
+    console.log((product.description ?? "No desc").toUpperCase());
+    //null 병합 연산자로도 출력 가능
+
+    if (product.description) {
+      console.log(product.description.toUpperCase());
+    } else {
+      console.log("NO DESC");
+    }
+  }
+
+  printDescription1(product1);
+  printDescription1(product2);
+
+  //읽기 전용 속성
+  // 읽기 전용 속성은 보안상 중요한 값 등 초기 설정 후 불변이어야 하는 값을 지정할 때 유용하게 사용.
+  interface Config {
+    readonly apiKey: string;
+    endpoint: string;
+    timeout?: number;
+  }
+
+  const config: Config = {
+    apiKey: "abc123",
+    endpoint: "https://api.example.com",
+  };
+
+  config.endpoint = "https://api.newexample.com";
+  config.timeout = 5000;
+
+  // config.apiKey = "xyz789"; //readonly 속성이라서 재할당 불가
+
+  // 읽기 전용 속성이 참조 값일 경우 주의해야 할 사항
+
+  interface ReadonlyArrayDemo {
+    readonly items: number[];
+  }
+
+  const demo: ReadonlyArrayDemo = {
+    items: [1, 2, 3],
+  };
+
+  demo.items.push(4);
+  demo.items[0] = 10;
+  // 참조기 때문에 push 등으로 값을 추가하거나 기존의 값을 수정하는 일은 오류가 발생하지 않음.
+  // demo.items = [5,6]; //재할당은 불가
+
+  //객체 뿐 아니라 함수의 타입 정의에도 사용
+  interface MathOperation {
+    (a: number, b: number): number;
+  }
+
+  const add: MathOperation = function (a, b) {
+    return a + b;
+  };
+
+  const multiply: MathOperation = (a, b) => a * b;
+
+  console.log(add(1, 2).toFixed(2), multiply(3, 4));
+
+  const operations: MathOperation[] = [
+    (a, b) => a + b,
+    (a, b) => a - b,
+    (a, b) => a * b,
+    (a, b) => a / b,
+  ];
+  // 매개변수 둘을 받아서 값 하나를 반환하는 함수들이 들어감.
+  // 이처럼 같은 형식들의 함수들을 하나의 종류로 묶는 데 인터페이스가 사용.
+
+  operations.forEach((operation) => {
+    console.log(operation(3, 2));
+    // console.log(operation(3,"Two")); //함수에 인자로 이와 같이 다른 타입을 넣어 실행하면 이와 같이 컴파일 오류가 발생.
+  });
+}
