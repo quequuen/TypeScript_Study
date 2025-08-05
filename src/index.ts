@@ -873,4 +873,100 @@
     console.log(operation(3, 2));
     // console.log(operation(3,"Two")); //함수에 인자로 이와 같이 다른 타입을 넣어 실행하면 이와 같이 컴파일 오류가 발생.
   });
+
+  //반환값을 갖지 않는 인터페이스
+  interface Callback {
+    (): void;
+  }
+
+  const onDone: Callback = () => {
+    console.log("Task completed");
+  };
+
+  onDone();
+
+  interface Button {
+    label: string;
+    onClick: () => void;
+  }
+
+  const myButton: Button = {
+    label: "Submit",
+    onClick: () => {
+      console.log("Submitted!");
+    },
+  };
+
+  //속성을 일일이 다 지정하지 않고, 속성과 값으로 사용할 수 있는 타입만 지정하는 방법
+  //인덱스 시그니처
+  interface PhoneBook {
+    [name: string]: string;
+    //여기에 사용된 name은 단순한 식별자로, 'name'이 아닌 다른 이름이 와도 상관 없음
+  }
+  //이 인터페이스를 타입으로 갖는 객체는 아래와 같이 어떤 문자열 값이든 키로 가질 수 있음.
+  //개수도 제한이 없으므로 보다 유연하게 사용 가능
+
+  const phones: PhoneBook = {
+    Alice: "010-1234-5678",
+    Bob: "010-8765-4321",
+  };
+
+  phones.Cahrlie = "010-1111-2222";
+  phones["David"] = "010-2222-3333";
+  phones[0] = "010-3333-4444"; //‼
+  //0이 숫자가 아닌 문자열로 변환되어 들어감
+
+  console.log(console.log(phones)); //리턴값 확인
+
+  interface Profile {
+    [index: string]: string | number | boolean;
+  }
+  //이렇게 하면 자유도는 늘어나지만 이를 사용하는 곳에서 타입을 체크해야 하는 경우도 증가함
+
+  const profile: Profile = {
+    name: "John Doe",
+    age: 30,
+  };
+
+  profile.married = true;
+
+  console.log(profile);
+
+  //숫자 인덱스를 사용하는 인터페이스
+  interface StringArray {
+    [index: number]: string;
+  }
+
+  const veges: StringArray = {
+    10: "carrot",
+    11: "broccoli",
+    12: "spinach",
+  };
+
+  const fruits: StringArray = ["apple", "banana", "cherry"];
+  console.log(veges[10], fruits[1]);
+  console.log(veges, fruits);
+
+  //인터페이스의 대안
+  //매핑된 타입 방식
+
+  type AllowedKeys = "English" | "Math" | "Science";
+
+  type Scores = {
+    [K in AllowedKeys]: number;
+  };
+  type Grades = {
+    [K in AllowedKeys]: string;
+  };
+
+  const scores: Scores = {
+    English: 85,
+    Math: 90,
+    Science: 95,
+  };
+  const grades: Grades = {
+    English: "B",
+    Math: "A",
+    Science: "A+",
+  };
 }
