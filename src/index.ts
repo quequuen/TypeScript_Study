@@ -1114,7 +1114,7 @@
       console.log("Duck is swimming");
     }
     //둘 중 하나의 함수를 지우게 되면 오류가 남
-    // 어떤 인터페이스가 적용되면 그에 포함된 한수들을 모두 구현해야 하도록 되어있음.
+    // 어떤 인터페이스가 적용되면 그에 포함된 함수들을 모두 구현해야 하도록 되어있음.
   }
 
   //초과 속성 검사
@@ -1190,7 +1190,7 @@
         name: string;
       };
 
-      // 타입 멸칭이 다른 타입 별칭으로부터 확장할 때는 이와 같은 문법으로 '교차 타입' 방식을 사용
+      // 타입 별칭이 다른 타입 별칭으로부터 확장할 때는 이와 같은 문법으로 '교차 타입' 방식을 사용
       type Dog = Animal & {
         breed: string;
       };
@@ -1240,6 +1240,6 @@
   const partialItem2: PartialProduct = {
     name: "Notebook",
     price: 10,
-    // description:  "A notebook for wiriting" //인터페이스에 존재하지 않는 속성
+    // description:  "A notebook for writing" //인터페이스에 존재하지 않는 속성
   };
 }
