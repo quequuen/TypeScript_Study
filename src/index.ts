@@ -1243,3 +1243,51 @@
     // description:  "A notebook for writing" //인터페이스에 존재하지 않는 속성
   };
 }
+
+{
+  // 타입스크립트의 클래스 기본 사용법
+
+  class Person {
+    name: string;
+    age: number;
+    //생성자
+    //인스턴스를 만드는 메소드
+    constructor(name: string, age: number) {
+      this.name = name;
+      this.age = age;
+    }
+
+    describe(): string {
+      return `${this.name} is ${this.age} years old.`;
+    }
+    //해당 속성들과 메소드는 public
+  }
+
+  const john = new Person("John", 30);
+  const mary = new Person("Mary", 25);
+
+  console.log(john.describe());
+  console.log(mary.describe());
+
+  //생성자에서 기본값을 사용하는 예제
+
+  class Book {
+    title: string;
+    pages: number;
+
+    constructor(title: string = "Untitled", pages: number = 100) {
+      this.title = title;
+      this.pages = pages;
+    }
+
+    summary(): string {
+      return `${this.title} has ${this.pages} pages.`;
+    }
+  }
+
+  const b1 = new Book();
+  const b2 = new Book("TypeScript Handbook", 300);
+
+  console.log(b1.summary());
+  console.log(b2.summary());
+}
