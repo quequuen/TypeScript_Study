@@ -1290,4 +1290,51 @@
 
   console.log(b1.summary());
   console.log(b2.summary());
+
+  //선택적 매개변수와 나머지 매개변수
+  class Logger {
+    constructor(prefix?: string, ...messages: string[]) {
+      const tag = prefix ?? "Log";
+      console.log(`[${tag}]`, ...messages);
+    }
+  }
+
+  new Logger();
+  new Logger("Info");
+  new Logger("Error", "Something went wrong", "Code: 500");
+
+  //접근 제한자
+  class User {
+    public id: number;
+    private password: string; //private는 이 블록 안에서만 사용 가능
+    protected email: string; //public보다는 제한 되지만 private보다는 다소 자유로움. 해당 클래스로부터 상속받은 클래스 내에거도 사용 가능.
+
+    constructor(id: number, password: string, email: string) {
+      this.id = id;
+      this.password = password;
+      this.email = email;
+    }
+
+    checkPassword(pw: string): boolean {
+      return this.password === pw;
+    }
+  }
+
+  const user = new User(1, "secret", "user@example.com");
+  console.log(user.id);
+  // console.log(user.password); //private
+  // console.log(user.email);  //protected
+
+  class Admin extends User {
+    resetEmail(newEmail: string) {
+      this.email = newEmail;
+    }
+    getInfo() {
+      return {
+        id: this.id,
+        // password: this.password,//private 속성이라 사용 불가
+        email: this.email,
+      };
+    }
+  }
 }
