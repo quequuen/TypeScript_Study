@@ -1337,4 +1337,63 @@
       };
     }
   }
+
+  class UserA {
+    id: number;
+    name: string;
+
+    constructor(id: number, name: string) {
+      this.id = id;
+      this.name = name;
+    }
+  }
+
+  class UserB {
+    constructor(public id: number, public name: string) {}
+    // 생성자가 public 매개변수를 받으면, 해당 매개변수는 자동으로 클래스의 속성으로 선언되고 초기화됨.
+  }
+
+  const a = new UserA(1, "Alice");
+  console.log(a.id, a.name);
+
+  const b = new UserB(2, "Bob");
+  console.log(b.id, b.name);
+
+  //읽기 전용 속성
+  class Config {
+    readonly appName: string;
+    version: string = "1.0.0";
+
+    constructor(appName: string) {
+      this.appName = appName;
+    }
+    print() {
+      console.log(`${this.appName} v${this.version}`);
+    }
+  }
+
+  const cfg = new Config("MyApp");
+  cfg.version = "2.0.0";
+  console.log(cfg.appName); //readonly 앞에 private 속성까지 붙으면 이런 식의 접근도 불가
+  // cfg.appName = "Other"; //readonly 속성이므로 재할당 불가
+
+  class Account {
+    constructor(
+      public id: number,
+      private password: string,
+      protected email: string,
+      readonly createdAt: Date
+    ) {}
+
+    protected login(pw: string): boolean {
+      return this.password === pw;
+    }
+  }
+
+  const acc = new Account(100, "pw1234", "user@example.com", new Date());
+  console.log(acc.id, acc.createdAt);
+  // console.log(acc.password); //private 속성
+  // console.log(acc.email); //protected 속성
+  // console.log(acc.login("pw1234")); //protected 속성
+  // acc.createdAt = new Date(); //readonly 속성
 }
