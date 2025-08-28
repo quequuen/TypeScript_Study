@@ -1307,7 +1307,7 @@
   class User {
     public id: number;
     private password: string; //private는 이 블록 안에서만 사용 가능
-    protected email: string; //public보다는 제한 되지만 private보다는 다소 자유로움. 해당 클래스로부터 상속받은 클래스 내에거도 사용 가능.
+    protected email: string; //public보다는 제한 되지만 private보다는 다소 자유로움. 해당 클래스로부터 상속받은 클래스 내에서도 사용 가능.
 
     constructor(id: number, password: string, email: string) {
       this.id = id;
