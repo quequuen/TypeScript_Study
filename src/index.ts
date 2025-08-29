@@ -1397,3 +1397,22 @@
   // console.log(acc.login("pw1234")); //protected 속성
   // acc.createdAt = new Date(); //readonly 속성
 }
+{
+  //클래스의 상속
+  class Animal {
+    constructor(public name: string) {}
+    move(distance: number): void {
+      console.log(`${this.name} moved ${distance} meters.`);
+    }
+  }
+
+  class Bird extends Animal {
+    fly(): void {
+      console.log(`${this.name} is flying!`);
+    }
+  }
+
+  const sparrow = new Bird("Sparrow");
+  sparrow.move(10); //Sparrow moved 10 meters.
+  sparrow.fly(); //Sparrow is flying!
+}
