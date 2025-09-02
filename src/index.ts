@@ -1415,4 +1415,47 @@
   const sparrow = new Bird("Sparrow");
   sparrow.move(10); //Sparrow moved 10 meters.
   sparrow.fly(); //Sparrow is flying!
+
+  //오버라이드(override)
+  {
+    class Animal {
+      constructor(public name: string) {}
+      speak(): void {
+        console.log(`${this.name} makes a sound.`);
+      }
+    }
+
+    class Dog extends Animal {
+      //부모 클래스에서 정의한 같은 메소드를 자시 메소드에서 재정의
+      //메소드 오버라이딩은 특정 자식 클래스가 특정 메소드의 작업을 부모와는 다르게 수행하고자 할 때 사용
+      speak(): void {
+        console.log(`${this.name} barks.`);
+      }
+    }
+
+    const dog = new Dog("Buddy");
+    dog.speak(); // Buddy barks.
+  }
+
+  //super 사용법
+  class Person {
+    constructor(public name: string) {}
+    greet(): void {
+      console.log(`Hello, my name is ${this.name}.`);
+    }
+  }
+
+  class Employee extends Person {
+    constructor(name: string, public department: string) {
+      super(name); //부모 클래스의 생성자를 호출
+    }
+    greet(): void {
+      super.greet(); //부모 클래스의 메소드를 호출
+      console.log(`I work in the ${this.department} department.`);
+      //부모 클래스의 메소드를 호출한 뒤 추가적인 동작을 수행
+    }
+  }
+
+  const emp = new Employee("Alice", "Engineering");
+  emp.greet();
 }
