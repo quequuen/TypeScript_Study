@@ -1458,4 +1458,114 @@
 
   const emp = new Employee("Alice", "Engineering");
   emp.greet();
+
+  //이처럼 부모 클래스에 작성된 생성자나 메소드를 호출하는 데 사용되는 것이 'super'
+
+  //다형성
+
+  {
+    class Animal {
+      constructor(public name: string) {}
+
+      speak(): void {
+        console.log(`${this.name}: (sound)`);
+      }
+    }
+    //이처럼 자식 클래스들을 묶어주는 역할만 하고, 스스로는 나서지 않는 클래스들을 실무에서 볼 수 있음.
+    //그런 경우, 이 'speak'처럼, 어차피 구현한대로 사용되지도 않을 메소드 등을 만드는 건 낭비일 수도 있음.
+
+    class Cat extends Animal {
+      speak(): void {
+        console.log(`${this.name}: Meow!`);
+      }
+    }
+
+    class Dog extends Animal {
+      speak(): void {
+        console.log(`${this.name}: Woof!`);
+      }
+    }
+
+    //이는 'Animal'의 자식 클래스인 'Cat', 'Dog'의 인스턴스들도 포함될 수 있다는 뜻
+    const animals: Animal[] = [
+      new Cat("Luna"),
+      new Dog("Buddy"),
+      new Cat("Milo"),
+      new Animal("Generic Animal"),
+    ];
+
+    for (const animal of animals) {
+      animal.speak();
+    }
+
+    //객체지향의 다형성은 이처럼 한 클래스를 여러 갈래로 세분화하고 , 또 이들을 하나의 카테고리로 묶어 다룰 수 있도록 만들어줌.
+  }
+
+  //추상 클래스
+  {
+    abstract class Animal {
+      constructor(public name: string) {}
+      abstract speak(): void;
+      //abstract로 추상화
+      move(): void {
+        console.log(`${this.name} moves.`);
+      }
+    }
+
+    //추상 클래스로부터 상속받은 자식 클래스들은 아래와 같이 해당 메소드를 오버라이드하여 구현해야 함.
+
+    class Cat extends Animal {
+      speak(): void {
+        console.log(`${this.name}: Meow!`);
+      }
+    }
+
+    class Dog extends Animal {
+      speak(): void {
+        console.log(`${this.name}: Woof!`);
+      }
+    }
+
+    // const animal1 = new Animal("Animal");   //추상 클래스의 인스턴스는 생성할 수 없음
+    const cat1 = new Cat("Tom");
+    const dog1 = new Dog("Jerry");
+
+    const animals: Animal[] = [cat1, dog1, new Cat("Luna"), new Dog("Milo")];
+    for (const animal of animals) {
+      animal.speak();
+      animal.move();
+    }
+
+    //또 다른 예제
+    abstract class Shape {
+      abstract getArea(): number;
+    }
+
+    class Circle extends Shape {
+      constructor(public radius: number) {
+        super();
+        //부모 클래스에 생성자가 없더라도, 자식 클래스의 생성자에서는 'super()'를 호출해야 함.
+        //이를 생략하면 컴파일 오류 발생
+      }
+      getArea(): number {
+        return Math.PI * this.radius ** 2;
+      }
+    }
+
+    class Rectangle extends Shape {
+      constructor(public width: number, public height: number) {
+        super();
+      }
+      getArea(): number {
+        return this.width * this.height;
+      }
+    }
+
+    function printArea(shape: Shape): void {
+      console.log(`Area: ${shape.getArea()}`);
+    }
+
+    printArea(new Circle(5));
+    printArea(new Rectangle(4, 6));
+  }
 }
