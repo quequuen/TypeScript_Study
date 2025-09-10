@@ -1642,3 +1642,123 @@
   console.log(Counter.count); //3
   //정적 속성은 클래스 이름으로 직접 접근
 }
+
+{
+  //고급 타입들
+  //인터섹션 타입
+  type Person = {
+    name: string;
+    age: number;
+  };
+
+  type Employee = {
+    employeeId: number;
+    department: string;
+  };
+
+  type Staff = Person & Employee;
+  // & 연산자로 합쳐 두 타입을 모두 갖는 새로운 타입을 만듦.
+  // 이 교차 타입은 두 타입의 모든 속성을 포함함으로 이 타입으로 객체를 생성할 때 하나의 속성이라도 빠지면 컴파일 오류.
+  // 서로 다른 타입의 속성을 결합해 더 구체적인 타입을 만들 때 유용.
+
+  const alice: Staff = {
+    name: "Alice",
+    age: 30,
+    employeeId: 101,
+    department: "HR",
+  };
+
+  //인터섹션 타입에 대한 또 다른 예제
+  type Drivable = {
+    drive(): void;
+  };
+
+  type Flyable = {
+    fly(): void;
+  };
+
+  type FlyingCar = Drivable & Flyable;
+
+  // 이처럼 메소드를 포함한 타입들을 합칠 떄도 사용 가능.
+  class SuperCar implements FlyingCar {
+    drive(): void {
+      console.log("Driving on the road...");
+    }
+    fly(): void {
+      console.log("Flying in the sky...");
+    }
+  }
+
+  //유니온 타입
+  function printValue(value: string | number) {
+    console.log("Value is: ", value);
+  }
+
+  printValue("Hello");
+  printValue(42);
+
+  //유니온 타입과 타입 가드 활용
+  function processValue(value: string | number) {
+    // console.log(value.toUpperCase); value가 number로 들어올 시 해당 부분 실행 불가하기 때문에 컴파일 오류.
+    if (typeof value === "string") {
+      console.log(value.toUpperCase());
+    } else {
+      console.log(value.toFixed(2));
+    }
+  }
+
+  console.log(
+    processValue("hello"),
+    processValue(3.14159)
+    // ,processValue(true) // string | number 타입이 아니기 때문에 컴파일 오류.
+  );
+
+  //타입 가드 예제
+  type Dog = {
+    kind: "dog";
+    bark: () => void;
+  };
+
+  type Cat = {
+    kind: "cat";
+    meow: () => void;
+  };
+
+  type Animal = Dog | Cat;
+
+  function makeSound(animal: Animal) {
+    if ("bark" in animal) {
+      //'in' 연산자를 사용하여, 해당 객체에 'bark' 속성이 있는지 확인
+      animal.bark();
+    } else {
+      animal.meow();
+    }
+    // 또 다른 타입 가드 방법
+    if (animal.kind === "dog") {
+      animal.bark();
+    } else {
+      animal.meow();
+    }
+  }
+
+  //리터럴 타입(열거형)
+
+  type ButtonSize = "small" | "medium" | "large";
+
+  function createButton(size: ButtonSize) {
+    console.log(`Button size is: ${size}`);
+  }
+
+  createButton("medium");
+  // createButton("extra-large"); //small | medium | large 내에 포함되지 않음.
+
+  type RetryCount = 0 | 1 | 2 | 3;
+
+  function setRetry(count: RetryCount) {
+    console.log(`Retries is set to: ${count}`);
+  }
+
+  setRetry(2);
+  // setRetry(5); // 0 | 1 | 2 | 3 내에 포함되지 않음.
+  //리터럴 타입은 열거형에 비해 더 간결하고 유연하며, 문자열이나 숫자 같은 기본 타입을 직접 사용해 별도의 건언 없이 값의 범위를 제한할 수 있다.
+}
