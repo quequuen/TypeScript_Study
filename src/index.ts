@@ -1761,4 +1761,47 @@
   setRetry(2);
   // setRetry(5); // 0 | 1 | 2 | 3 내에 포함되지 않음.
   //리터럴 타입은 열거형에 비해 더 간결하고 유연하며, 문자열이나 숫자 같은 기본 타입을 직접 사용해 별도의 건언 없이 값의 범위를 제한할 수 있다.
+
+  //boolean 리터럴
+  type FeatureToggle = true;
+  function enableFeature(flag: FeatureToggle) {
+    console.log("Feature is enabled.");
+  }
+
+  enableFeature(true);
+  // enableFeature(false); //FeatureToggle 타입은 true만 허용됨.
+  // 이 함수가 무엇을 하는 용도인지, 호출문을 작성하는 개발자가 상기하도록 돕는 역할
+
+  const mode1 = "light"; //type: "light" 어차피 다른 값이 들어올 수 없는 상수이므로 타입을 문자열로 넓힐 필요가 없음.
+  // let mode2 = "light"; //type: string
+  //상수 mode1은 리터럴 타입이지만, mode2는 일반 문자열 타입
+
+  let mode2: "light" | "dark" = "light";
+  //변수를 사용하고 싶으면 해당 변수의 타입을 리터럴 타입 유니언으로 지정
+
+  function setTheme(theme: "light" | "dark") {
+    console.log(`Theme set to ${theme}`);
+  }
+
+  setTheme(mode1);
+  // setTheme(mode2); //mode2는 일반 문자열 타입이기 때문에 컴파일 오류.
+  setTheme(mode2);
+
+  //리터럴 타입을 객체에 적용하는 법
+  const config = {
+    env: "production",
+    debug: false,
+  };
+
+  config.debug = true;
+
+  const strictConfig = {
+    env: "production",
+    debug: false,
+  } as const;
+
+  // strictConfig.debug = false; //as const로 수정 불가
+
+  const numbers = [1, 2, 3] as const;
+  // numbers[0] = 4; //as const로 수정 불가
 }
