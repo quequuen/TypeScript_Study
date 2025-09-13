@@ -1679,7 +1679,7 @@
 
   type FlyingCar = Drivable & Flyable;
 
-  // 이처럼 메소드를 포함한 타입들을 합칠 떄도 사용 가능.
+  // 이처럼 메소드를 포함한 타입들을 합칠 때도 사용 가능.
   class SuperCar implements FlyingCar {
     drive(): void {
       console.log("Driving on the road...");
@@ -1760,7 +1760,7 @@
 
   setRetry(2);
   // setRetry(5); // 0 | 1 | 2 | 3 내에 포함되지 않음.
-  //리터럴 타입은 열거형에 비해 더 간결하고 유연하며, 문자열이나 숫자 같은 기본 타입을 직접 사용해 별도의 건언 없이 값의 범위를 제한할 수 있다.
+  //리터럴 타입은 열거형에 비해 더 간결하고 유연하며, 문자열이나 숫자 같은 기본 타입을 직접 사용해 별도의 선언 없이 값의 범위를 제한할 수 있다.
 
   //boolean 리터럴
   type FeatureToggle = true;
