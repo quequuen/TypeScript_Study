@@ -1805,3 +1805,48 @@
   const numbers = [1, 2, 3] as const;
   // numbers[0] = 4; //as const로 수정 불가
 }
+{
+  //고급타입들(심화)
+  //맵드 타입과 인덱스 시그니처의 활용
+  type User = {
+    id: number;
+    name: string;
+    email: string;
+  };
+
+  type OptionalUser = {
+    [K in keyof User]?: User[K];
+    //물음표가 붙으면 각각이 선택벅 속성이 됨.
+  };
+
+  const user1: OptionalUser = {
+    name: "Alice",
+  };
+
+  const user2: OptionalUser = {
+    id: 1,
+    email: "bob@example.com",
+  };
+  // 기존의 객체 타입으로부터 보다 유연한 형태의 타입들을 만들어낼 수 있음.
+
+  //엄격한 타입 생성
+  {
+    type User = {
+      id: number;
+      name: string;
+      email: string;
+    };
+
+    type ReadonlyUser = {
+      readonly [K in keyof User]: User[K];
+    };
+
+    const readonlyUser: ReadonlyUser = {
+      id: 1,
+      name: "John",
+      email: "john@example.com",
+    };
+
+    // readonlyUser.id = 2; //readonly 속성이므로 재할당 불가
+  }
+}
