@@ -1849,4 +1849,43 @@
 
     // readonlyUser.id = 2; //readonly 속성이므로 재할당 불가
   }
+
+  // 템플릿 리터럴 타입
+  // 자바스크립트에서도 문자열을 조합하듯이, 타입에서도 문자열을 조합해서 새로운 타입을 만드는 방법입니다.
+  type Lang = "en" | "fr" | "sp";
+
+  type Locale = `locale-${Lang}`;
+  //"locale-en" | "locale-fr" | "locale-sp"
+
+  const locale1: Locale = "locale-en";
+  const locale2: Locale = "locale-fr";
+  const locale3: Locale = "locale-sp";
+
+  // const locale4: Locale = "locale-pt"; // "locale-pt"는 포함되지 않음
+
+  // 둘 이상의 리터럴 타입 조합
+  type Color = "red" | "blue";
+  type Shade = "light" | "dark";
+
+  type ColorComb = `${Shade}-${Color}`;
+  //Generates: "light-red" | "light-blue" | "dark-red" | "dark-blue"
+
+  const colorComb1: ColorComb = "light-red";
+  const colorComb2: ColorComb = "dark-blue";
+  const colorComb3: ColorComb = "dark-red";
+  const colorComb4: ColorComb = "dark-blue";
+
+  // const colorComb5: ColorComb = "dark-green"; // "dark-green"는 포함되지 않음
+
+  //더 많은 타입 조합도 가능
+  type MultiComb = `${"A" | "B"}-${"on" | "off"}-${1 | 2 | 3}`;
+
+  // "A-on-1" | "A-on-2" | "A-on-3"
+  // "A-off-1" | "A-off-2" | "A-off-3"
+  // "B-on-1" | "B-on-2" | "B-on-3"
+  // "B-off-1" | "B-off-2" | "B-off-3"
+
+  const setting1: MultiComb = "A-on-2";
+  const setting2: MultiComb = "B-off-3";
+  // const setting3: MultiComb = "C-on-1"; // "C-on-1"는 포함되지 않음
 }
