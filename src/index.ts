@@ -1888,4 +1888,54 @@
   const setting1: MultiComb = "A-on-2";
   const setting2: MultiComb = "B-off-3";
   // const setting3: MultiComb = "C-on-1"; // "C-on-1"는 포함되지 않음
+
+  // 타입 가드
+
+  class Dog {
+    bark() {
+      console.log("Woof!");
+    }
+  }
+
+  class Cat {
+    meow() {
+      console.log("Meow!");
+    }
+  }
+
+  type Pet = Dog | Cat;
+
+  function speak(pet: Pet) {
+    if (pet instanceof Dog) {
+      //타입가드&'instanceof'로 둘 중 어느 인스턴스인지 확인.
+      pet.bark();
+    } else {
+      pet.meow();
+    }
+  }
+
+  speak(new Dog());
+  speak(new Cat());
+
+  //사용자 정의 타입 가드
+  type Fish = { swim: () => void };
+  type Bird = { fly: () => void };
+
+  //User-defined Type Guard
+  function isFish(pet: Fish | Bird): pet is Fish {
+    //반환 타입에 'pet is Fish'를 지정
+    //이렇게 작성된 함수가 'true'를 반환하면 타입스크립트는 매개변수로 주어진 값의 타입이 'Fish'라고 인지하게 됨.
+    return (pet as Fish).swim !== undefined;
+    //매개변수인 'pet'을 강제로 'Fish' 타입으로 간주하고, 'swim' 속성이 존재하는지 확인
+  }
+
+  function move(animal: Fish | Bird) {
+    if (isFish(animal)) {
+      animal.swim();
+      //animal.fly();
+    } else {
+      animal.fly();
+    }
+  }
+  //이처럼 사용자 정의 타입 가드를 따로 만들어두면 복잡한 타입 검사가 여러곳에서 이뤄질 때 유용하게 사용 가능.
 }
