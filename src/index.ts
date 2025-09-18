@@ -1938,4 +1938,67 @@
     }
   }
   //이처럼 사용자 정의 타입 가드를 따로 만들어두면 복잡한 타입 검사가 여러곳에서 이뤄질 때 유용하게 사용 가능.
+  {
+    type ApiResponse = {
+      status: string;
+      data?: unknown;
+      //어떤 속성이든 넣을 수 있는 any+안전장치
+    };
+
+    type User = {
+      id: number;
+      name: string;
+    };
+
+    function isUser(data: any): data is User {
+      return (
+        typeof data === "object" &&
+        typeof data.id === "number" &&
+        typeof data.name === "string"
+      );
+    }
+    //해당 데이터가 객체인지, 그것에 'id'속성이 있으며 그 타입이 숫자인지, 'name' 속성이 있으며 그 타입이 문자열인지 확인
+
+    function handleResponse(response: ApiResponse) {
+      if (response.status === "success" && isUser(response.data)) {
+        console.log("User ID:", response.data.id);
+        console.log("User Name:", response.data.name);
+      } else {
+        console.error("Invalid user data");
+      }
+    }
+
+    handleResponse({
+      status: "success",
+      data: {
+        id: 1,
+        name: "John Doe",
+      },
+    });
+  }
+
+  //타입 단언(Type Assertion)
+  const input1 = document.getElementById("myInput");
+  // console.log(input1.value);
+  // 이것이 'value'란 속성을 포함하는 객체인지 타입스크립트가 알 수 없다는 의미
+  // 'getElementById'를 호출한 결과가 꼭 유효한 요소를 반환하리라는 보장이 없기 때문
+
+  const input2 = document.getElementById("myInput") as HTMLInputElement;
+  console.log(input2.value);
+
+  function handleData(data: unknown) {
+    // console.log(data.length);
+
+    const str = data as string;
+    console.log(str.length);
+  }
+
+  function process(value: string | number) {
+    const str = value as string;
+    console.log(str.toUpperCase());
+  }
+
+  const number = 123 as unknown as string;
+  console.log(number.length);
+  const str = number.toUpperCase();
 }
