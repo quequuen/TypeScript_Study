@@ -1987,7 +1987,8 @@
   console.log(input2.value);
 
   function handleData(data: unknown) {
-    // console.log(data.length);
+    // console.log(data.length); //타입 가드 없이 접근하려 하면 오류가 발생함
+    //'unknown이니까 조심하자'는 의미의 타입이므로
 
     const str = data as string;
     console.log(str.length);
@@ -1998,7 +1999,32 @@
     console.log(str.toUpperCase());
   }
 
+  //타입 단언이 위험한 이유
   const number = 123 as unknown as string;
-  console.log(number.length);
+  //123이라는 숫자 타입의 값을 문자열로 타입 단언을 할 수 없지만, unknown을 거쳐 우회(이중 단언)
   const str = number.toUpperCase();
+  //그러면 이와 같이 'number'상수로부터 문자열의 메소드를 호출할 수 있게 됨.
+  //당연히 런타임 오류 발생.
+  //타입 단언이 잘못 활용되면 이런 일도 생김.
+
+  //Non-null 단언 연산자(!)
+  //특정 속성이 'undefined'가 아님을 보증.
+  {
+    type User = {
+      name: string;
+      age?: number; //Optional
+      //age는 number | undefined
+    };
+
+    function printUserAge(user: User) {
+      // console.log(user.age.toFixed(1));
+      // age가 undefined일 수도 있기 때문에 바로 숫자의 메소드를 사용하지 못함.
+
+      console.log(user.age!.toFixed(1));
+      //!를 붙여 undefined가 아님을 단언
+    }
+
+    printUserAge({ name: "Alice", age: 25 });
+    // printUserAge({ name: "Bob" }); //Non-null 단언으로 undefined가 아님을 단언했지만 실제로는 undefined 값을 주고 있기 때문에 런타임 오류 발생.
+  }
 }
