@@ -1816,7 +1816,7 @@
 
   type OptionalUser = {
     [K in keyof User]?: User[K];
-    //물음표가 붙으면 각각이 선택벅 속성이 됨.
+    //물음표가 붙으면 각각이 선택적 속성이 됨.
   };
 
   const user1: OptionalUser = {
