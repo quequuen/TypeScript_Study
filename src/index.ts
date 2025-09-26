@@ -2041,5 +2041,24 @@
     const b1 = identity<number>(123);
     const b2 = b1.toFixed(2);
     //제네릭은 함수나 클래스 등을 만들 때 타입을 고정하지 않고, 사용하는 시점에 타입을 지정할 수 있게 해줌.
+
+    function getArrayLength<T>(arr: T[]): number {
+      return arr.length;
+    }
+    //제네릭으로 주어지는 타입의 값들을 담는 배열을 매개변수로 받음.
+
+    console.log(
+      getArrayLength<number>([1, 2, 3]),
+      getArrayLength<string>(["a", "b"])
+    );
+
+    //제네릭을 두 개 사용하는 코드
+    function merge<T, U>(a: T, b: U): [T, U] {
+      return [a, b];
+    }
+    //두 값을 매개변수로 받은 다음 튜플로 묶어 반환.
+
+    const result = merge<string, number>("age", 30);
+    console.log(result);
   }
 }
