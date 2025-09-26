@@ -2027,4 +2027,19 @@
     printUserAge({ name: "Alice", age: 25 });
     // printUserAge({ name: "Bob" }); //Non-null 단언으로 undefined가 아님을 단언했지만 실제로는 undefined 값을 주고 있기 때문에 런타임 오류 발생.
   }
+  {
+    //제네릭 기초
+    function identity<T>(arg: T): T {
+      return arg;
+    }
+    //여기서 'T'는 반복문의 'i'처럼, 제네릭에서 관습적으로 널리 사용되는 이름.
+    //변수나 상수에 원하는 값을 할당할 수 있듯, 이 'T'는 사용자가 원하는 타입으로 동적으로 설정 가능.
+
+    const a1 = identity<string>("hello");
+    const a2 = a1.toUpperCase();
+
+    const b1 = identity<number>(123);
+    const b2 = b1.toFixed(2);
+    //제네릭은 함수나 클래스 등을 만들 때 타입을 고정하지 않고, 사용하는 시점에 타입을 지정할 수 있게 해줌.
+  }
 }
