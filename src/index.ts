@@ -2060,5 +2060,16 @@
 
     const result = merge<string, number>("age", 30);
     console.log(result);
+
+    //제네릭 타입 별칭 사용
+    type Mapper<T> = (input: T) => T;
+    //매개변수와 반환값의 타입이 같은 함수를 작성하기 위해 사용.
+
+    const stringEcho: Mapper<string> = (msg) => msg.toUpperCase();
+    const numberEcho: Mapper<number> = (num) => num * 2;
+
+    console.log(stringEcho("hello world"), numberEcho(10));
+
+    //제네릭을 인터페이스에 사용하는 예제
   }
 }
