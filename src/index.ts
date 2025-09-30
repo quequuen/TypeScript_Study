@@ -2071,5 +2071,16 @@
     console.log(stringEcho("hello world"), numberEcho(10));
 
     //제네릭을 인터페이스에 사용하는 예제
+    interface Box<T> {
+      value: T;
+    }
+    //제네릭에 어떤 타입이 지정되는냐에 따라 그 타입의 값을 담는 속성이 되는 것.
+
+    const numberBox: Box<number> = { value: 123 };
+    const stringBox: Box<string> = { value: "hello" };
+    const booleanBox: Box<boolean> = { value: true };
+    //이처럼 원하는 어떤 타입이든 포함할 수 있는 박스 구조를, 제네릭을 적용한 인터페이스로 정의할 수 있음.
+
+    //인터페이스와 제네릭의 실무 사용법
   }
 }
