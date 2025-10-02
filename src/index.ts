@@ -2082,5 +2082,23 @@
     //이처럼 원하는 어떤 타입이든 포함할 수 있는 박스 구조를, 제네릭을 적용한 인터페이스로 정의할 수 있음.
 
     //인터페이스와 제네릭의 실무 사용법
+    interface Result<T, E> {
+      success: boolean;
+      data?: T;
+      error?: E;
+    }
+    //네트워크상의 요청 등의 작업에 경과로 반환될 객체의 타입
+    //성공 여부에 따라 data, error 값이 선택적으로 들어감.
+
+    const successResult: Result<string, null> = {
+      success: true,
+      data: "Operation succeded",
+    };
+
+    const errorResult: Result<null, string> = {
+      success: false,
+      error: "Something went wrong",
+    };
+    //이처럼 조건에 따라 다른 속성들을 포함하는 객체들의 타입을 제네릭을 통해 유연하게 만들 수 있다.
   }
 }
