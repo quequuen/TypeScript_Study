@@ -2100,5 +2100,20 @@
       error: "Something went wrong",
     };
     //이처럼 조건에 따라 다른 속성들을 포함하는 객체들의 타입을 제네릭을 통해 유연하게 만들 수 있다.
+
+    //인터페이스와 인덱스 시그니처, 제네릭이 함께 사용되는 예제
+    interface Dictionary<T> {
+      [key: string]: T;
+    }
+
+    const stringDictionary: Dictionary<string> = {
+      hello: "world",
+      goodbye: "earth",
+    };
+
+    const numberDictionary: Dictionary<number> = {
+      one: 1,
+      two: 1,
+    };
   }
 }
