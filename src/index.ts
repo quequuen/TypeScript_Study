@@ -2115,5 +2115,23 @@
       one: 1,
       two: 1,
     };
+
+    //인터페이스의 상속과 제네릭이 함께 사용되는 예제
+    interface BaseResponse {
+      success: boolean;
+    }
+    //어떤 작업이 수행되고 나면 그 성공 여부를 해당 속성에 단아 반환하기 위함.
+
+    interface DataResponse<T> extends BaseResponse {
+      data: T;
+    }
+
+    const userResponse: DataResponse<{ name: string; age: number }> = {
+      success: true,
+      data: {
+        name: "Alice",
+        age: 30,
+      },
+    };
   }
 }
