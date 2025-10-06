@@ -2133,5 +2133,39 @@
         age: 30,
       },
     };
+
+    //클래스에 제네릭 적용
+    class Container<T> {
+      private value: T;
+      constructor(value: T) {
+        this.value = value;
+      }
+      getValue(): T {
+        return this.value;
+      }
+      setValue(value: T): void {
+        this.value = value;
+      }
+    }
+
+    const numberContainer = new Container<number>(123);
+    console.log(numberContainer.getValue()); //123
+
+    const strContainer = new Container<string>("TypeScript");
+    console.log(strContainer.getValue()); //"TypeScript"
+
+    //제네릭을 사용하여 특정 타입에 국한되지 않고 사용할 수 있는 클래스를 이처럼 만든거예요.
+
+    //제네릭 둘을 사용하는 클래스 예제
+    class KeyValuePair<K, V> {
+      constructor(public key: K, public value: V) {}
+
+      print(): void {
+        console.log(`Key: ${this.key}, Value: ${this.value} `);
+      }
+    }
+
+    const pair = new KeyValuePair<string, number>("age", 30);
+    pair.print(); //Key: age, Value: 30
   }
 }
