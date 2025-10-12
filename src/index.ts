@@ -2113,7 +2113,7 @@
 
     const numberDictionary: Dictionary<number> = {
       one: 1,
-      two: 1,
+      two: 2,
     };
 
     //인터페이스의 상속과 제네릭이 함께 사용되는 예제
