@@ -2120,7 +2120,7 @@
     interface BaseResponse {
       success: boolean;
     }
-    //어떤 작업이 수행되고 나면 그 성공 여부를 해당 속성에 단아 반환하기 위함.
+    //어떤 작업이 수행되고 나면 그 성공 여부를 해당 속성에 담아 반환하기 위함.
 
     interface DataResponse<T> extends BaseResponse {
       data: T;
