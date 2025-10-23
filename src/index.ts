@@ -2168,4 +2168,20 @@
     const pair = new KeyValuePair<string, number>("age", 30);
     pair.print(); //Key: age, Value: 30
   }
+  {
+    //제네릭 제약과 조건부 타입
+    function printLength<T extends { length: number }>(value: T): void {
+      console.log(value.length);
+    }
+    //이 함수에 적용된 'T'가 이와 같이 'extends' 키워드를 사용해서 오른쪽의 객체 타입으로부터 확장하는 것을 볼 수 있다.
+
+    printLength<string>("Hello");
+
+    printLength("Hello");
+    printLength([1, 2, 3]);
+    printLength({ length: 10 });
+
+    // printLength(42);
+    // 'number' 타입은 'length' 속성이 없기 때문에 컴파일 오류 발생.
+  }
 }
