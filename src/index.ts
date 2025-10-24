@@ -2174,8 +2174,10 @@
       console.log(value.length);
     }
     //이 함수에 적용된 'T'가 이와 같이 'extends' 키워드를 사용해서 오른쪽의 객체 타입으로부터 확장하는 것을 볼 수 있다.
+    //length라는 속성을 반드시 포함하는 타입으로 제한하는 것.
 
     printLength<string>("Hello");
+    //제네릭도 아래의 예시들과 같이 타입 추론이 가능
 
     printLength("Hello");
     printLength([1, 2, 3]);
@@ -2183,5 +2185,150 @@
 
     // printLength(42);
     // 'number' 타입은 'length' 속성이 없기 때문에 컴파일 오류 발생.
+
+    interface Named {
+      name: string;
+    }
+
+    function greet<T extends Named>(person: T): void {
+      //위의 Named 인터페이스로부터 상속받는 제네릭을 적용
+      console.log("Hello, " + person.name);
+    }
+
+    greet({ name: "Alice", age: 30 });
+    // greet({age: 30});
+    // 'name' 속성이 없기 때문에 컴파일 오류 발생.
+
+    //제네릭 + keyof
+    function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+      return obj[key];
+    }
+    // 첫 번째 인자로 주어진 객체로부터, 두 번째 인자로 주어진 이름의 속성 값을 반환하는 함수.
+    // 때문에 두 제네릭이 필요.
+
+    const product = { id: 1, name: "Phone", price: 500 };
+
+    const productName = getProperty(product, "name");
+    console.log(productName); //"Phone"
+
+    // const error = getProperty(product, "weight");
+    // "weight"는 product 객체의 키에 해당하지 않기 때문에 컴파일 오류 발생.
+
+    //keyof 키워드
+    type MyKey = keyof { id: 1; name: "Phone"; price: 500 };
+    // 'id' | 'name' | 'price'
+
+    const a: MyKey = "id";
+    const b: MyKey = "name";
+    const c: MyKey = "price";
+    // const d: MyKey = "description"; // 'description'는 포함되지 않음
+
+    interface HasLength {
+      length: number;
+    }
+
+    interface HasName {
+      name: string;
+    }
+
+    function describe<T extends HasLength & HasName>(value: T): void {
+      // 위의 두 인터페이스의 교차 타입으로부터 확장하는 제네릭
+      console.log(`${value.name} has length ${value.length}`);
+    }
+
+    describe({ name: "Box", length: 20, color: "red" });
+    // describe({name: "Box" });
+    // 'length' 속성이 없기 때문에 컴파일 오류 발생.
+
+    //조건부 타입
+    //타입 수준에서 조건을 걸어서 다른 타입을 선택하도록 만드는 강력한 기능
+    type IsNumber<T> = T extends number ? "Number" : "Not Number";
+
+    type A = IsNumber<number>; // 'Number'
+    type B = IsNumber<string>; // 'Not Number'
+    type C = IsNumber<42>; // 'Number'
+    // 제네릭에 타입으로 주어진 'T'가 숫자 타입에 속하는가 여부에 따라 문자열 리터럴 타입인 'Number'와
+    // 'Not Number'를 반환.
+
+    const a1: A = "Number";
+    const b1: B = "Not Number";
+    const c1: C = "Number";
+
+    // const a2: A = ""; //Number가 아닌 다른 값은 허용되지 않음
+    // const b2: B = "Number"; //Not Number가 아닌 다른 값은 허용되지 않음
+    // const c2: C = 123; //Number가 아닌 다른 값은 허용되지 않음
+    {
+      //조건부 타입의 활용 예제
+      type MyReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+      //삼항 연산자의 앞부분은 'T'가 함수 형태임을 나타냄.
+      //'any' 타입의 매개변수 0개 이상을 받은 뒤 'infer R'이란 값을 반환하는 형태이므로, 함수를 나타냄.
+      //'infer R'은 이 함수가 반환하는 타입을 'R'이란 이름으로 추론하라는 의미.
+      //따라서 이 조건부 타입은 'T'가 함수 타입이라면 그 반환 타입을, 아니라면 'never' 타입을 반환.
+
+      type A = MyReturnType<() => string>; // string
+      type B = MyReturnType<() => number[]>; //number[]
+      type C = MyReturnType<string>; //함수가 아니기 때문에 never 반환
+
+      const a: A = "hello";
+      const b: B = [1, 2, 3];
+      // const c: C = 123;  //never 타입이므로 어떤 값도 할당 불가
+    }
+
+    //infer 키워드
+    //타입을 추론해서 변수처럼 임시로 이름 붙이는 키워드
+
+    type MyType<T> = T extends infer U ? U : never;
+    // T 타입을 U라는 이름으로 추론
+    //T를 분석해서 그 안에서 어떤 타입인지 꺼내 쓰고 싶을 때 사용
+    // 여기에서 infer가 없게 되면 any: never가 되기 때문에 함수의 리턴 값은 유동적이지 않고 항상 any 또는 never가 됨.
+    // 리턴값을 유동적인 값으로 임시적인 이름을 붙여서 사용하고 싶을 때 infer를 사용
+    // 즉, infer는 return type을 유동적으로 만들기 위한 변수와 같은 역할.
+    {
+      //infer를 사용한 또 다른 예제
+      type ElementType<T> = T extends (infer U)[] ? U : T;
+
+      type A = ElementType<string[]>; //string
+      type B = ElementType<number[]>; //number
+      type C = ElementType<boolean>; //boolean
+
+      const a: A = "Hello";
+      const b: B = 42;
+      const c: C = true;
+    }
+    //infer 사용 예제
+    type MyReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+    // 리턴값의 타입을 반환.
+    type MyParameters<T> = T extends (...args: infer P) => any ? P : never;
+    // 매개변수의 타입을 반환.
+    // 둘 다 제넥릭에 함수가 아닌 값을 전달했다면 never 타입을 반환하게 되어 아무 값도 할당하지 못한다.
+
+    function createUser(name: string, age: number) {
+      return {
+        id: Date.now(),
+        name,
+        age,
+      };
+    }
+
+    type NewUser = MyReturnType<typeof createUser>;
+    const user: NewUser = { id: 1, name: "John", age: 30 };
+
+    type CreateUserParams = MyParameters<typeof createUser>;
+    // 'MyParameters'를 사용해서 위 함수의 매개변수를 튜플 형태의 타입으로 가져오게 됨.
+    const params: CreateUserParams = ["John", 30];
+    //문자열과 숫자의 튜플 형태의 값을 'params'에 저장할 수 있음.
+
+    // 조건부 타입의 또 다른 사용법
+    type MyNonNullable<T> = T extends null | undefined ? never : T;
+
+    function printValue<T>(value: MyNonNullable<T>) {
+      console.log(value);
+    }
+
+    printValue("hello");
+    printValue(123);
+    //제네릭의 타입이 추론됨.
+    printValue(null); //never 타입이므로 금지
+    printValue(undefined); //never 타입이므로 금지
   }
 }
