@@ -2328,7 +2328,7 @@
     printValue("hello");
     printValue(123);
     //제네릭의 타입이 추론됨.
-    printValue(null); //never 타입이므로 금지
-    printValue(undefined); //never 타입이므로 금지
+    // printValue(null); //never 타입이므로 금지
+    // printValue(undefined); //never 타입이므로 금지
   }
 }
