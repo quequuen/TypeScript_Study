@@ -2300,7 +2300,7 @@
     // 리턴값의 타입을 반환.
     type MyParameters<T> = T extends (...args: infer P) => any ? P : never;
     // 매개변수의 타입을 반환.
-    // 둘 다 제넥릭에 함수가 아닌 값을 전달했다면 never 타입을 반환하게 되어 아무 값도 할당하지 못한다.
+    // 둘 다 제네릭에 함수가 아닌 값을 전달했다면 never 타입을 반환하게 되어 아무 값도 할당하지 못한다.
 
     function createUser(name: string, age: number) {
       return {
