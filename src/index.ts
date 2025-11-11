@@ -2337,5 +2337,23 @@
     //내장 제네릭 타입: 타입스크립트에서 기본으로 제공하는 제네릭 타입(배열, 프로미스 등)
     //+)원본 배열의 불변성을 유지할 필요가 있는 경우 ReadonlyArray<T> 타입을 사용
     //Map(키와 값을 갖는 요소)/Set(중복되지 않는 것들의 집합) 등도 제네릭 타입을 지원
+
+    // WeakMap과 WeakSet
+    const object1 = { id: 1 };
+    const object2 = { id: 2 };
+
+    const weakMap: WeakMap<object, string> = new WeakMap();
+    weakMap.set(object1, "Object One");
+
+    console.log(weakMap.get(object1));
+
+    const objectA = { name: "Alice" };
+    const objectB = { name: "Bob" };
+
+    const weakSet: WeakSet<object> = new WeakSet();
+    weakSet.add(objectA);
+
+    console.log(weakSet.has(objectA)); // true
+    console.log(weakSet.has(objectB)); // false
   }
 }
