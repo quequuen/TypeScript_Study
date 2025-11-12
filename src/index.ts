@@ -2341,6 +2341,7 @@
     // WeakMap과 WeakSet
     const object1 = { id: 1 };
     const object2 = { id: 2 };
+    //WeakMap은 키로 객체만 허용
 
     const weakMap: WeakMap<object, string> = new WeakMap();
     weakMap.set(object1, "Object One");
@@ -2352,8 +2353,68 @@
 
     const weakSet: WeakSet<object> = new WeakSet();
     weakSet.add(objectA);
+    //WeakSet은 객체만 요소로 허용
 
     console.log(weakSet.has(objectA)); // true
     console.log(weakSet.has(objectB)); // false
+    // 객체들이 가비지 컬렉션의 대상이 될 수 있도록 허용
+    //즉, 더 이상 참조되지 않는 객체들은 메모리에서 자동으로 해제될 수 있음. (누수 방지)
+
+    //비동기 프로그래밍
+    type User = {
+      id: number;
+      name: string;
+    };
+
+    function fetchUser(id: number): Promise<User> {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ id, name: "Alice" });
+        }, 1000);
+      });
+    }
+    // 1초 후에 사용자 정보를 담은 객체를 반환하는 프로미스
+
+    async function getUserInfo() {
+      const user = await fetchUser(1);
+      console.log(`User ID: ${user.id}, User Name: ${user.name}`);
+    }
+
+    getUserInfo();
+
+    //Utility Types
+    // TypeScript에서 제공하는 유틸리티 타입들은 기존 타입을 변형하거나 조작하는 데 사용되는 내장 제네릭 타입들.
+    //Partial<T>
+    interface Product {
+      id: number;
+      name: string;
+    }
+
+    const partialProduct: Partial<Product> = {
+      name: "Cup",
+    };
+    //제네릭으로 전달한 결과를 타입으로 사용함.
+    //그 결과로 만들어진 타입은 'Product'의 모든 속성을 선택적으로 만듦.
+    //즉, 'Partial'은 주어진 객체 타입의 모든 속성을 선택적 속성으로 만들어주는 데 사용.
+
+    //Required<T>
+    interface UserProfile {
+      name: string;
+      age: number;
+    }
+
+    const completeProfile: Required<UserProfile> = {
+      name: "Bob",
+      age: 25,
+    };
+
+    // const completeProfile2: Required<UserProfile> = {
+    //   name: "Bob",
+    //   age: 25,
+    // };
+
+    //'UserProfile'의 모든 속성을 필수 속성으로 만듦.
+    //'Required'는 전달된 객체 타입의 속성들을 모두 필수 속성으로 갖는 타입.
+    //Partial과 정반대의 기능
   }
 }
