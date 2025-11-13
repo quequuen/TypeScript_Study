@@ -2417,4 +2417,39 @@
     //'Required'는 전달된 객체 타입의 속성들을 모두 필수 속성으로 갖는 타입.
     //Partial과 정반대의 기능
   }
+
+  //Readonly<T>
+  interface Settings {
+    theme: string;
+    darkMode: boolean;
+  }
+
+  const config: Readonly<Settings> = {
+    theme: "light",
+    darkMode: true,
+  };
+
+  // config.theme = "dark"; //Readonly로 인해 수정 불가
+
+  //주어진 객체의 속성들 중 일부만 가져오는 타입
+  interface Product {
+    id: number;
+    name: string;
+    price: number;
+  }
+
+  const productPreview1: Pick<Product, "id" | "name"> = {
+    id: 1,
+    name: "Pen",
+  };
+
+  const productPreview2: Pick<Product, "id" | "name"> = {
+    id: 2,
+  };
+
+  const productPreview3: Pick<Product, "id" | "name"> = {
+    id: 3,
+    name: "Jack",
+    email: "Jack@example.com",
+  };
 }
