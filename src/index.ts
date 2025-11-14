@@ -2505,4 +2505,32 @@
   const warmColor2: WarmColors = "yellow";
   // const coldColor: WarmColors = "blue"; //컴파일 오류: "blue"는 포함되지 않음
   //Extract<T, U>는 제네릭 타입 T에서 U에 해당하는 타입들만 추출하여 새로운 타입을 만듦.
+
+  //NonNullable<T>
+  //null과 undefined 제거
+  type MaybeString = string | null | undefined;
+
+  type NonNullableString = NonNullable<MaybeString>;
+
+  const safeString: NonNullableString = "Hello, World!";
+  // const errorString1: NonNullableString = null; //컴파일 오류: null과 undefined는 제거됨
+  // const errorString2: NonNullableString = undefined; //컴파일 오류: null과 undefined는 제거됨
+
+  //Parameters<T>, ReturnType<T>
+  //함수로부터 매개변수와 반환값을 추출하는 기능
+  function multiply(a: number, b: number): number {
+    return a * b;
+  }
+
+  type MultiplyParams = Parameters<typeof multiply>;
+  // [number, number]
+  type MultiplyResult = ReturnType<typeof multiply>;
+  // number
+
+  function doubleMultiply(...args: MultiplyParams): MultiplyResult {
+    const result = multiply(...args);
+    return result * 2;
+  }
+
+  console.log(doubleMultiply(3, 4)); // 24
 }
