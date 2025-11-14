@@ -2442,14 +2442,32 @@
     id: 1,
     name: "Pen",
   };
+  // Pick<T, K>는 제네릭 타입 T에서 K에 해당하는 속성들만 선택하여 새로운 타입을 만듦.
 
-  const productPreview2: Pick<Product, "id" | "name"> = {
-    id: 2,
-  };
+  // const productPreview2: Pick<Product, "id" | "name"> = {
+  //   id: 2,
+  // };
+  // 컴파일 오류: 'name' 속성이 누락됨
 
-  const productPreview3: Pick<Product, "id" | "name"> = {
-    id: 3,
-    name: "Jack",
-    email: "Jack@example.com",
+  // const productPreview3: Pick<Product, "id" | "name"> = {
+  //   id: 3,
+  //   name: "Jack",
+  //   email: "Jack@example.com",
+  // };
+
+  // 컴파일 오류: 'email' 속성은 'Product' 타입에 없음
+
+  //Omit<T, K>
+  interface Product {
+    id: number;
+    name: string;
+    price: number;
+  }
+
+  const productWithoutPrice: Omit<Product, "price"> = {
+    id: 1,
+    name: "Notebook",
   };
+  //Omit<T, K>는 제네릭 타입 T에서 K에 해당하는 속성들을 제외한 나머지 속성들로 새로운 타입을 만듦.
+  //즉, 'price' 속성을 제외한 'id'와 'name' 속성만 포함하는 타입이 됨.
 }
