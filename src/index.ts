@@ -2470,4 +2470,39 @@
   };
   //Omit<T, K>는 제네릭 타입 T에서 K에 해당하는 속성들을 제외한 나머지 속성들로 새로운 타입을 만듦.
   //즉, 'price' 속성을 제외한 'id'와 'name' 속성만 포함하는 타입이 됨.
+
+  //Record<K, T>
+  type Role = "admin" | "user" | "guest";
+
+  const Descriptions: Record<Role, string> = {
+    admin: "Administrator",
+    user: "Regular User",
+    guest: "Guest User",
+  };
+  // Role 타입의 각 값들을 키로 사용.
+
+  console.log(Descriptions.admin, Descriptions.user, Descriptions.guest);
+  //어떤 정해진 키 집합에 대해, 각각의 값을 정해진 타입으로 매핑할 때 이 'Record' 타입을 유용하게 사용.
+
+  //Exclude<T, U>
+  //차집합
+  type Colors = "red" | "green" | "blue";
+  type PrimaryColors = Exclude<Colors, "green">;
+
+  const primaryColor: PrimaryColors = "red";
+  const anotherPrimaryColor: PrimaryColors = "blue";
+  // const invalidColor: PrimaryColors = "green"; //컴파일 오류: "green"는 제외됨
+  //Exclude<T, U>는 제네릭 타입 T에서 U에 해당하는 타입을 제외한 나머지 타입들로 새로운 타입을 만듦.
+
+  //Extract<T, U>
+  //교집합
+  type MixedColors = "red" | "green" | "blue" | "yellow";
+  type BasicWarmColors = "red" | "yellow" | "orange";
+
+  type WarmColors = Extract<MixedColors, BasicWarmColors>;
+
+  const warmColor1: WarmColors = "red";
+  const warmColor2: WarmColors = "yellow";
+  // const coldColor: WarmColors = "blue"; //컴파일 오류: "blue"는 포함되지 않음
+  //Extract<T, U>는 제네릭 타입 T에서 U에 해당하는 타입들만 추출하여 새로운 타입을 만듦.
 }
