@@ -2534,7 +2534,6 @@
 
   console.log(doubleMultiply(3, 4)); // 24
   {
-    // 함수로부터 매개변수와 반환값을 추출하는 기능
     function createUserInfo(name: string, phone: number) {
       return {
         name,
