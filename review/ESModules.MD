@@ -13,46 +13,16 @@
 
 - module 기본 사용
   math.js 파일 내 예시
-  <!-- PAID_START -->
-  **export** const PI = 3.14159265359;
-
-**export** function add(a, b){
-return a+b;
-}
-
-**export** class MathOptions{
-multiply(a, b){
-return a \* b;
-}
-}
-
-<!-- PAID_END -->
 
 ☞ 각각의 선언 및 할당되는 곳 앞에 export 키워드
 
 app.js 내 예시
 
-<!-- PAID_START -->
-
-import {PI, add, MathOptions} from "math.js 경로"
-☞ 구조분해할당으로 가져온 예
-import * as math from "math.js 경로"
-☞ *를 사용해 모든 파일을 하나의 객체로 묶어 가져온 예
-☞ 해당 방법은 math라는 alias를 추가해주어 math.PI와 같이 math alias의 key로 가져올 수 있음.
-
-<!-- PAID_END -->
 
 - 각 모듈 문서에는 대표하는 값이 있는 경우 존재(함수, 객체 등)
   해당 상황에는 default 키워드로 지정
-  <!-- PAID_START -->
 
-  math.js 내 예시
+  ☞ 모듈의 대표값(이름은 자유자재)은 중괄호 밖에, 다른 값들은 각각의 이름 그대로 중괄호 안에 넣으면 됨.
+  ☞ 하나의 값에만 default 사용 가능
 
-  export default function add~
-
-  app.js 내 예시
-
-  import addAB, {PI, MathOptions} from "math 경로"
-  <!-- PAID_END -->
-
-  ☞ 모듈의 대표값은 중괄호 밖에, 다른 값들은 각각의 이름 그대로 중괄호 안에 넣으면 됨.
+  - 서로 다른 모듈에서 같은 이름의 값들이 내보내어지는 경우

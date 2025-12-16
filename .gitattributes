@@ -1,1 +1,1 @@
-*.md filter=remove_paid
+review/*.md filter=remove_paid
