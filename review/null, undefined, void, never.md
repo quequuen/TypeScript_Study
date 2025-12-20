@@ -1,4 +1,4 @@
-##null과 undefined
+## null과 undefined
 
 - null: 값을 의도적으로 비워둘 때 사용.
 - undefined: 변수가 선언되었지만 값이 아직 할당되지 않았거나 정의되지 않은 상태를 나타냄.

@@ -1,4 +1,4 @@
-##any와 unknown
+## any와 unknown
 
 - any: 어떤 값을 넣어도 오류가 나지 않음. (모르니까 신경 끄자)<br>
   <br>
