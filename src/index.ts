@@ -1,3 +1,8 @@
+import { greet, add, config, Logger } from "./lib.js";
+// 해당 라이브러리는 js로 작성되어 타입들이 지정되어 있지 않기 때문에
+// 타입스크립트 코드에서 해당 모듈을 불러올 때 타입 선언 파일(.d.ts)을 함께 제공해야 함.
+// 타입 정의 파일
+
 {
   function greet(name: string): string {
     return `Hello, ${name}`;
@@ -2552,3 +2557,24 @@
     const user2 = cloneUserInfo(user1);
   }
 }
+
+window.myAppName = "SuperApp";
+
+function myGlobalAlert(message: string) {
+  alert(`[${window.myAppName}] ${message}`);
+}
+
+myGlobalAlert("Hello!");
+// myGlobalAlert(1);
+// myGlobalAlert는 string만 받을 수 있어서 컴파일 오류
+
+// lodash
+// js에서 배열, 객체, 문자열 등을 쉽게 다룰 수 있게 도와주는 유틸리티 함수 모음 라이브러리
+// 최근에는 별로 사용하지 않는 추세
+// 해당 라이브러리만 설치할 경우, ts는 문자열만 인수로 받는 capitalize에 숫자를 넘겨주어도
+// capitalize가 타입 정의가 되어 있지 않기 때문에 잘못되었음을 감지하지 못함.
+// npm install --save-dev @types/lodash
+// 해당 라이브러리 이름 앞에 '@types/'가 붙어 있는 패키지가 'npm' 등에 있다면 해당 프로젝트의 타입 정의가 있다는 의미
+// 이후 123을 받는 부분은 컴파일 오류
+
+// console.log(_.capitalize("hello"), _.capitalize(123));
