@@ -12,7 +12,14 @@ This repository contains study materials and examples for learning TypeScript. I
 ## 타입 시스템
 
 - [고급 타입들](review/고급%20타입들.md#고급-타입들)
+
   - 인터섹션 타입
   - 유니온 타입
   - 타입 가드
   - 리터럴 타입
+
+- [고급 타입들 (심화)](<review/고급%20타입들(심화).md>)
+  - 맵드 타입과 인덱스 시그니처
+  - 템플릿 리터럴 타입
+  - 사용자 정의 타입 가드
+  - 타입 단언과 주의점
