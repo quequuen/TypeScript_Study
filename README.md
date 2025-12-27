@@ -26,6 +26,14 @@ This repository contains study materials and examples for learning TypeScript. I
   - 타입 단언과 주의점
 
 - [기본 자료형](review/기본%20자료형.md)
+
   - 타입 선언과 타입 추론
   - any 타입의 문제점
   - BigInt 자료형과 설정
+
+- [내장 제네릭 타입과 유틸리티 타입](review/내장%20제네릭%20타입과%20유틸리티%20타입.md)
+  - WeakMap / WeakSet 개념
+  - 비동기 프로그래밍 (Promise, async / await)
+  - Utility Types  
+    (`Partial`, `Required`, `Readonly`, `Pick`, `Omit`, `Record`,  
+    `Extract`, `NonNullable`, `Parameters`, `ReturnType`)
