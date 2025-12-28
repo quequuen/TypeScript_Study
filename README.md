@@ -32,8 +32,16 @@ This repository contains study materials and examples for learning TypeScript. I
   - BigInt 자료형과 설정
 
 - [내장 제네릭 타입과 유틸리티 타입](review/내장%20제네릭%20타입과%20유틸리티%20타입.md)
+
   - WeakMap / WeakSet 개념
   - 비동기 프로그래밍 (Promise, async / await)
   - Utility Types  
     (`Partial`, `Required`, `Readonly`, `Pick`, `Omit`, `Record`,  
     `Extract`, `NonNullable`, `Parameters`, `ReturnType`)
+
+- [네임스페이스와 모듈](review/네임스페이스와%20모듈.md)
+
+  - namespace를 통한 이름 충돌 방지
+  - ES Module(import / export) 구조
+  - 타입과 유틸리티의 모듈화
+  - namespace vs module 비교 및 실무 기준
