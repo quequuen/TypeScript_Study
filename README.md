@@ -11,6 +11,20 @@ This repository contains study materials and examples for learning TypeScript. I
 
 ## 타입 시스템
 
+- [기본 자료형](review/기본%20자료형.md)
+
+  - 타입 선언과 타입 추론
+  - any 타입의 문제점
+  - BigInt 자료형과 설정
+
+- [배열 · 튜플 · 객체](review/배열.md)
+
+  - 배열 구조 (1차원 / 다차원)
+  - 배열 메서드와 타입 추론
+  - 읽기 전용 배열 (ReadonlyArray)
+  - 튜플과 배열의 차이
+  - 객체 타입과 구조적 타이핑
+
 - [고급 타입들](review/고급%20타입들.md#고급-타입들)
 
   - 인터섹션 타입
@@ -24,12 +38,6 @@ This repository contains study materials and examples for learning TypeScript. I
   - 템플릿 리터럴 타입
   - 사용자 정의 타입 가드
   - 타입 단언과 주의점
-
-- [기본 자료형](review/기본%20자료형.md)
-
-  - 타입 선언과 타입 추론
-  - any 타입의 문제점
-  - BigInt 자료형과 설정
 
 - [내장 제네릭 타입과 유틸리티 타입](review/내장%20제네릭%20타입과%20유틸리티%20타입.md)
 
