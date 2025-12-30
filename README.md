@@ -53,3 +53,9 @@ This repository contains study materials and examples for learning TypeScript. I
   - ES Module(import / export) 구조
   - 타입과 유틸리티의 모듈화
   - namespace vs module 비교 및 실무 기준
+
+- [열거형 (Enum)](review/열거형.md)
+  - 숫자 열거형과 문자열 열거형
+  - 자동 값 할당 규칙
+  - const enum의 컴파일 차이
+  - enum vs 유니언 타입
