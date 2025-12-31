@@ -25,6 +25,15 @@ This repository contains study materials and examples for learning TypeScript. I
   - 튜플과 배열의 차이
   - 객체 타입과 구조적 타이핑
 
+  - [인터페이스 활용](review/인터페이스.md)
+
+  - 인터페이스 확장(extends)과 다중 상속
+  - 속성 충돌 해결 및 유니온 타입 활용
+  - 중첩 인터페이스와 선언 병합(Declaration Merging)
+  - 클래스 청사진 설계 (implements)
+  - 초과 속성 검사(Excess Property Checks)와 우회 방법
+  - Interface vs Type Alias (교차 타입 & 확장성 비교)
+
 - [고급 타입들](review/고급%20타입들.md#고급-타입들)
 
   - 인터섹션 타입
@@ -55,6 +64,7 @@ This repository contains study materials and examples for learning TypeScript. I
   - namespace vs module 비교 및 실무 기준
 
 - [열거형 (Enum)](review/열거형.md)
+
   - 숫자 열거형과 문자열 열거형
   - 자동 값 할당 규칙
   - const enum의 컴파일 차이
