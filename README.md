@@ -77,3 +77,11 @@ This repository contains study materials and examples for learning TypeScript. I
   - 자동 값 할당 규칙
   - const enum의 컴파일 차이
   - enum vs 유니언 타입
+
+- [제네릭 기초](review/제네릭_기초.md)
+
+  - 제네릭 함수 정의 및 타입 매개변수(`T`)
+  - 다중 제네릭 매개변수(`T`, `U`) 활용
+  - 제네릭 타입 별칭과 인터페이스 조합
+  - 실무형 인터페이스(API 응답 결과, Dictionary) 설계
+  - 클래스에서의 제네릭 적용과 은닉화
