@@ -85,3 +85,11 @@ This repository contains study materials and examples for learning TypeScript. I
   - 제네릭 타입 별칭과 인터페이스 조합
   - 실무형 인터페이스(API 응답 결과, Dictionary) 설계
   - 클래스에서의 제네릭 적용과 은닉화
+
+- [제네릭 제약과 조건부 타입](review/제네릭_심화.md)
+
+  - `extends`를 이용한 제네릭 제약 조건
+  - `keyof` 연산자와 제네릭의 조합
+  - 조건부 타입(Conditional Types)의 기본 원리
+  - `infer` 키워드를 활용한 타입 추론 변수 활용
+  - 실무 활용 예제 (반환 타입 추출, Non-nullable 처리)
