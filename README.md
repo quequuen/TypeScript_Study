@@ -78,7 +78,7 @@ This repository contains study materials and examples for learning TypeScript. I
   - const enum의 컴파일 차이
   - enum vs 유니언 타입
 
-- [제네릭 기초](review/제네릭_기초.md)
+- [제네릭 기초](review/제네릭%20기초.md)
 
   - 제네릭 함수 정의 및 타입 매개변수(`T`)
   - 다중 제네릭 매개변수(`T`, `U`) 활용
@@ -86,10 +86,17 @@ This repository contains study materials and examples for learning TypeScript. I
   - 실무형 인터페이스(API 응답 결과, Dictionary) 설계
   - 클래스에서의 제네릭 적용과 은닉화
 
-- [제네릭 제약과 조건부 타입](review/제네릭_심화.md)
+- [제네릭 제약과 조건부 타입](review/제네릭%20제약과%20조건부%20타입.md)
 
   - `extends`를 이용한 제네릭 제약 조건
   - `keyof` 연산자와 제네릭의 조합
   - 조건부 타입(Conditional Types)의 기본 원리
   - `infer` 키워드를 활용한 타입 추론 변수 활용
   - 실무 활용 예제 (반환 타입 추출, Non-nullable 처리)
+
+- [클래스(객체지향관련개념들)](<review/클래스(객체지향관련개념들).md>)
+  - 클래스 상속(`extends`)과 메소드 오버라이딩
+  - `super` 키워드를 활용한 부모 생성자 및 메소드 호출
+  - 다형성(Polymorphism)을 활용한 인스턴스 통합 관리
+  - 추상 클래스(`abstract`)와 인터페이스(`implements`)의 차이점
+  - 정적 멤버(`static`)를 활용한 인스턴스 간 공유 데이터 관리
