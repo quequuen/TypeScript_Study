@@ -94,7 +94,15 @@ This repository contains study materials and examples for learning TypeScript. I
   - `infer` 키워드를 활용한 타입 추론 변수 활용
   - 실무 활용 예제 (반환 타입 추출, Non-nullable 처리)
 
+- [클래스 기초](<review/클래스(기본개념들).md>)
+
+  - 클래스 선언과 생성자(Constructor) 활용
+  - 접근 제한자(`public`, `private`, `protected`)의 차이
+  - 생성자 매개변수를 이용한 속성 자동 선언 (단축 문법)
+  - 읽기 전용 속성(`readonly`)과 기본값 설정
+
 - [클래스(객체지향관련개념들)](<review/클래스(객체지향관련개념들).md>)
+
   - 클래스 상속(`extends`)과 메소드 오버라이딩
   - `super` 키워드를 활용한 부모 생성자 및 메소드 호출
   - 다형성(Polymorphism)을 활용한 인스턴스 통합 관리
