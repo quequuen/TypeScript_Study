@@ -108,3 +108,10 @@ This repository contains study materials and examples for learning TypeScript. I
   - 다형성(Polymorphism)을 활용한 인스턴스 통합 관리
   - 추상 클래스(`abstract`)와 인터페이스(`implements`)의 차이점
   - 정적 멤버(`static`)를 활용한 인스턴스 간 공유 데이터 관리
+
+- [함수](review/함수.md)
+
+  - 함수의 기본 선언과 반환 타입
+  - 매개변수 활용 (선택적 매개변수 `?`, 기본값, 나머지 매개변수 `...`)
+  - 함수 오버로딩 (Function Overloading)과 시그니처
+  - 고차 함수를 위한 콜백 함수 타입 정의
