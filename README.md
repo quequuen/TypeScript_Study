@@ -115,3 +115,9 @@ This repository contains study materials and examples for learning TypeScript. I
   - 매개변수 활용 (선택적 매개변수 `?`, 기본값, 나머지 매개변수 `...`)
   - 함수 오버로딩 (Function Overloading)과 시그니처
   - 고차 함수를 위한 콜백 함수 타입 정의
+
+- [any와 unknown](<review/any와 unknown.md>)
+
+  - `any`: 타입 체크를 해제하는 '치트키'와 주의사항
+  - `unknown`: 타입 안전성을 보장하는 '조심스러운' 타입
+  - 타입 단언(`as`)과 타입 가드(`typeof`, `in`)를 통한 unknown 활용
