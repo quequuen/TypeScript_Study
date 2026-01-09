@@ -121,3 +121,10 @@ This repository contains study materials and examples for learning TypeScript. I
   - `any`: 타입 체크를 해제하는 '치트키'와 주의사항
   - `unknown`: 타입 안전성을 보장하는 '조심스러운' 타입
   - 타입 단언(`as`)과 타입 가드(`typeof`, `in`)를 통한 unknown 활용
+
+- [null, undefined, void, never](<review/null, undefined, void, never.md>)
+
+  - `null`과 `undefined`의 차이 및 유니온 타입 활용
+  - `strictNullChecks` 옵션의 중요성
+  - `void`: 반환값이 없는 함수의 표준
+  - `never`: 도달 불가능한 상태와 Exhaustive Check 기법
