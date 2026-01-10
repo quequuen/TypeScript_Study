@@ -128,3 +128,11 @@ This repository contains study materials and examples for learning TypeScript. I
   - `strictNullChecks` 옵션의 중요성
   - `void`: 반환값이 없는 함수의 표준
   - `never`: 도달 불가능한 상태와 Exhaustive Check 기법
+
+- [ES Modules](review/ESModules.md)
+
+  - ESM 설정 방법 (`package.json`, `.mjs`)
+  - `export`와 `import` (Named vs Default)
+  - `as` 키워드와 별칭을 이용한 이름 충돌 해결
+  - 모듈 캐싱 원리와 쿼리 스트링을 이용한 무효화
+  - `import()`를 이용한 동적 임포트 및 Top-level `await`
