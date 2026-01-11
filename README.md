@@ -136,3 +136,10 @@ This repository contains study materials and examples for learning TypeScript. I
   - `as` 키워드와 별칭을 이용한 이름 충돌 해결
   - 모듈 캐싱 원리와 쿼리 스트링을 이용한 무효화
   - `import()`를 이용한 동적 임포트 및 Top-level `await`
+
+- [tsconfig.json 설정 가이드](review/tsconfig.json.md)
+
+  - `compilerOptions`: 엄격한 타입 검사 및 경로 별칭 설정
+  - 실무 필수 옵션: `target`, `module`, `outDir` 등
+  - 컴파일 속도 최적화를 위한 옵션 (`skipLibCheck`, `incremental`)
+  - 파일 포함 및 제외 설정 (`include`, `exclude`)
